@@ -1,0 +1,9 @@
+http://192.168.2.171:8080/SpringRestDemo/pullmessages&Mobile=9999&Msg=AADHAAR+001
+
+
+C:\Program Files\Java\jdk1.8.0_102\jre\lib\security>keytool -import -file bibm.c
+er -keystore cacerts -alias bibm
+
+
+C:\Program Files\Java\jdk1.8.0_102\jre\lib\security>keytool -delete -alias bibm
+-keystore cacerts
