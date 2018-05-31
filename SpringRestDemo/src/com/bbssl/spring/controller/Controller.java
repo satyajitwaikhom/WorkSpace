@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bbssl.fin.FinRequest;
 import com.bbssl.spring.model.Pojo;
+import com.bbssl.spring.model.SmsKeywordValidation;
 /**
  * Handles requests for the Employee service.
  */
@@ -26,6 +28,9 @@ public class Controller {
 	
 	//Map to store employees, ideally we should use database
 	Map<Integer, Pojo> empData = new HashMap<Integer, Pojo>();
+	SmsKeywordValidation smskey=new SmsKeywordValidation();
+	FinRequest finreq=new FinRequest();
+	String keyresult="";
 	
 	@RequestMapping(value = RestURIConstants.DUMMY_EMP, method = RequestMethod.GET)
 	public @ResponseBody Pojo getDummyEmployee() {
@@ -40,17 +45,18 @@ public class Controller {
 	
 	@RequestMapping(value = RestURIConstants.GET_EMP, method = RequestMethod.GET)
 //	public @ResponseBody Pojo getEmployee(@PathVariable("id") int empId,@PathVariable("msg") String msg,@PathVariable("actno") String actno ){
-	public @ResponseBody String getEmployee(@PathVariable("id") int empId,@PathVariable("msg") String msg,@PathVariable("actno") String actno ){
-		logger.info("Start getEmployee. ID="+empId);
+	public @ResponseBody String getEmployee(@PathVariable("id") int phoneNumber,@PathVariable("msg") String msg,@PathVariable("actno") String actno ){
+		logger.info("Start getEmployee. ID="+phoneNumber);
 		
-		System.out.println("empId :"+empId);
+		System.out.println("phoneNumber :"+phoneNumber);
 		System.out.println("msg :"+msg);
 		System.out.println("actno :"+actno);
-		
-		
+
+		keyresult=smskey.keywordValidation(phoneNumber, msg, actno);
+		finreq.finRequest(phoneNumber,msg,msg,actno);
 		
 //		return empData.get(empId);
-		return "ok";
+		return keyresult;
 	}
 	
 	@RequestMapping(value = RestURIConstants.GET_ALL_EMP, method = RequestMethod.GET)
