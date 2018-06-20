@@ -33,7 +33,7 @@ public class FinRequest {
 	 * @param pNumber
 	 * @param msgType
 	 * @param msg
-	 * @param acctnum
+	 * @param account Number
 	 */
 	
 	public static void finRequest(int pNumber,String msgType,String msg,String acctnum ) {
